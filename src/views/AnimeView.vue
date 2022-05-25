@@ -1,26 +1,26 @@
 <template>
-  <article class="movie-details" v-show="movie">
+  <article class="anime-details" v-show="anime">
     <p @click="previousPage" class="back-home">Back Home</p>
     <div class="details">
       <div class="img-container">
-        <img :src="movie.Poster" alt="" />
+        <img :src="anime.images.jpg.image_url" alt="" />
       </div>
       <div class="information">
         <h2>
-          {{ movie.Title }} <span>({{ movie.Year }})</span>
+          {{ anime.title }} <span>({{ anime.aired.prop.from.year }})</span>
         </h2>
         <p>
-          Release Date: <span>{{ movie.Released }}</span>
+          Rating: <span>{{ anime.rating }}</span>
         </p>
         <p>
-          Score: <span>{{ movie.imdbRating }}/10</span>
+          Score: <span>{{ anime.score }}/10</span>
         </p>
       </div>
     </div>
     <div class="synopsis">
       <h3>Synopsis:</h3>
       <p>
-        {{ movie.Plot }}
+        {{ anime.synopsis }}
       </p>
     </div>
   </article>
@@ -34,7 +34,7 @@ export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
-    const movie = ref({});
+    const anime = ref({});
 
     const previousPage = () => {
       router.go(-1);
@@ -42,19 +42,19 @@ export default {
 
     onBeforeMount(async () => {
       const res = await fetch(
-        `http://www.omdbapi.com/?apikey=de75309e&i=${route.params.id}&plot=full`
+        `https://api.jikan.moe/v4/anime/${route.params.id}`
       );
       const data = await res.json();
-      movie.value = data;
+      anime.value = data.data;
     });
 
-    return { movie, previousPage };
+    return { anime, previousPage };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.movie-details {
+.anime-details {
   width: min(90%, 320px);
   margin: 0 auto;
 

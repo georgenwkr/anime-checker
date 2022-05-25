@@ -1,17 +1,17 @@
 <template>
-  <form @submit.prevent="getMovies">
-    <input type="text" placeholder="search movie..." v-model="search" />
+  <form @submit.prevent="getAnimes">
+    <input type="text" placeholder="search anime..." v-model="search" />
     <button><img src="../assets/search-icon.svg" alt="" /></button>
   </form>
-  <div class="movies">
-    <div class="card" v-for="movie in movies" :key="movie.imdbID">
-      <router-link :to="'/movie/' + movie.imdbID">
+  <div class="animes">
+    <div class="card" v-for="anime in animes" :key="anime.mal_id">
+      <router-link :to="'/anime/' + anime.mal_id">
         <div class="img-container">
-          <img :src="movie.Poster" alt="" />
+          <img :src="anime.images.jpg.image_url" alt="" />
         </div>
         <div class="info">
-          <h3>{{ movie.Title }}</h3>
-          <p>{{ movie.Year }}</p>
+          <h3>{{ anime.title }}</h3>
+          <p>{{ anime.score }}/10</p>
         </div>
       </router-link>
     </div>
@@ -25,16 +25,17 @@ export default {
   name: "HomeView",
   setup() {
     const search = ref("");
-    const movies = ref([]);
+    const animes = ref([]);
 
-    const getMovies = async () => {
+    const getAnimes = async () => {
       const res = await fetch(
-        `http://www.omdbapi.com/?apikey=de75309e&s=${search.value}`
+        `https://api.jikan.moe/v4/anime?q=${search.value}`
       );
       const data = await res.json();
-      movies.value = data.Search;
+      animes.value = data.data;
+      console.log(animes);
     };
-    return { search, movies, getMovies };
+    return { search, animes, getAnimes };
   },
 };
 </script>
@@ -80,7 +81,7 @@ form {
   }
 }
 
-.movies {
+.animes {
   display: grid;
   justify-items: start;
   grid-template-columns: repeat(1, 1fr);
