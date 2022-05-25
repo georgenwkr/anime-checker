@@ -1,30 +1,22 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <header>
+    <h1>moviecheck</h1>
+  </header>
+  <main>
+    <router-view />
+  </main>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@import "./styles/main.scss";
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+header {
+  h1 {
+    color: var(--cl-text);
+    font-weight: 800;
+    font-size: 38px;
+    text-align: center;
+    margin: 20px auto 10px;
   }
 }
 </style>

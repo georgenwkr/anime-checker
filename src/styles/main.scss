@@ -1,0 +1,27 @@
+:root {
+    --bg: #ffffff;
+    --bg-inp: #eeeeee;
+    --bg-btn: #937deb;
+    --cl-text: #1E2B44;
+    --cl-ph: #b4a8a8;
+    --cl-year: #45464f;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+body {
+    background: var(--bg);
+}
+
+ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
