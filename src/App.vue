@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>animecheck</h1>
+    <h1>anichek</h1>
   </header>
   <main>
     <router-view />
